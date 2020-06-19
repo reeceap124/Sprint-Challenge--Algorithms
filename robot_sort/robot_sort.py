@@ -92,12 +92,29 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    def merge_lists(listA, listB):
+        elements = len(listA) + len(listB) #not actually accessing self.list to get lengths, so assuming its okay to do this.
+        merged_list =  [0] + elements
+        i = 0
+        j = 0
+        for x in range(elements):
+            if i < len(listA)and j < len(listB):
+                if listA[i]
+
     def sort(self):
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        #was going to use bubble sort but realized can access length of list without directly accessing self.list.
+        # may need to do this recursively then with quick sort
+
+        #base case is if can move right. to tell if we only have one element in list
+        #pivot on first element
+        
+
+        if self.can_move_right:
+            
+            
 
 
 if __name__ == "__main__":
