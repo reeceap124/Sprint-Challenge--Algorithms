@@ -91,13 +91,82 @@ class SortingRobot:
         Returns True if the robot's light is on and False otherwise.
         """
         return self._light == "ON"
+            
 
     def sort(self):
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        ## Pseudo Code:
+
+        #set light to on
+        #pick up item
+        #while on:
+            #set to off
+            #while if can move right:
+                #move right
+                #compare
+                #if larger:
+                    #switch
+                    #set to on
+            #while can move left:
+                #move left
+        #super inefficient, but it's direct and the best i can come up with give my constraints.
+
+        ##Failed Attempt:
+
+        # self.set_light_on()
+        # self.swap_item()
+        # while self.light_is_on() is True:
+        #     self.set_light_off()
+        #     print(f"Light ON 1: {self.light_is_on()}")
+        #     while self.can_move_right():
+        #         self.move_right()
+        #         if self.compare_item() == -1:
+        #             self.swap_item()
+        #             # self.set_light_on()
+        #             # print(f"Light ON 2: {self.light_is_on()}")
+                
+        #     while self.can_move_left():
+        #         if self.compare_item() == 1:
+        #             self.swap_item()
+        #             self.set_light_on()
+        #             print(f"Light ON 3: {self.light_is_on()}")
+        #         self.move_left()
+        #     if self.light_is_on() is False:
+        #         print(f"Light ON 4: {self.light_is_on()}")
+        #     print('end of a round')
+
+        while True:
+            self.set_light_off()
+            while self.can_move_right(): #Make sure not at end of array
+                self.swap_item() #Swap current 
+                self.move_right() #Move right 
+                if self.compare_item() == 1: #Check if held item is greater, if so swap
+                    self.swap_item()
+                self.move_left() #Move Left
+                self.swap_item() #Deposit lesser card to left
+                self.move_right() #Move back right
+            while self.can_move_left(): #Make sure not at front of array
+                self.swap_item() #Swaps current
+                self.move_left() #Moves left
+                if self.compare_item() == -1: #Compares item held is less, if so swaps and signals that we need another go around by setting light on
+                    self.swap_item()
+                    self.set_light_on()
+                    # print("light is on")
+                self.move_right() #Moves right to deposit greater of two items
+                self.swap_item()
+                self.move_left() #Moves back left
+            if self.light_is_on() is False: #Check if light is on 
+                break
+            
+
+
+
+                
+
+            
+            
 
 
 if __name__ == "__main__":
@@ -105,6 +174,8 @@ if __name__ == "__main__":
     # with `python robot_sort.py`
 
     l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+
+    # l = [2, 1, 6, 2]
 
     robot = SortingRobot(l)
 
